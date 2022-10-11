@@ -7,12 +7,9 @@ from django.core.validators import RegexValidator
 
 
 class ThingForm(forms.ModelForm):
-
-
-
-        description=forms.CharField(max_length=120, blank=True ,widget= forms.Textarea())
-        quantity=forms.IntegerField(
-            validators=[MinValueValidator(0),MaxValueValidator(50)],
-            widget= forms.NumberInput
-        )
-        name=forms.CharField(max_length=35, unique=True)
+   class Meta:
+       model = Thing
+       fields = ['name', 'description', 'quantity']
+       widgets = {
+        'description': forms.Textarea(),
+        'quantity': forms.NumberInput() }
